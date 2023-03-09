@@ -3,9 +3,22 @@
 // UWAGA
 // Zwróć uwagę na to, że przycisk «Start» można klikać w nieskończoność. Zrób tak, żeby przycisk «Start» był nieaktywny, dopóki zmiana tematu jest uruchomiona (disabled).
 
-// Aby wygenerować losowy kolor użyj funkcji getRandomHexColor.
+
+const startBtn = document.querySelector("data-start");
+const stopBtn = document.querySelector("data-stop");
+let timerId = null;
+
+startBtn.addEventListener("click", () => {
+  timerId = setInterval(() => {
+    
+  }, 1000);
+});
 
 
+stopBtn.addEventListener("click", () => {
+  clearInterval(timerId);
+  console.log(`Interval with id ${timerId} has stopped!`);
+});
 
 
 
