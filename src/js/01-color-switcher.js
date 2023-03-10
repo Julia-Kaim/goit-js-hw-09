@@ -3,26 +3,57 @@
 // UWAGA
 // Zwróć uwagę na to, że przycisk «Start» można klikać w nieskończoność. Zrób tak, żeby przycisk «Start» był nieaktywny, dopóki zmiana tematu jest uruchomiona (disabled).
 
+const body = document.querySelector("body");
+const startBtn = document.querySelector("button[data-start]");
+const stopBtn = document.querySelector("button[data-stop]");
 
-const startBtn = document.querySelector("data-start");
-const stopBtn = document.querySelector("data-stop");
+stopBtn.disabled = true;
 let timerId = null;
 
+const changeBgColorRandom = () => {
+	body.style.backgroundColor = `${randomBodyColorGenerator.getRandomHexColor()}`;
+}; 
+
+
+const randomBodyColorGenerator = {
+
+
+	getRandomHexColor() {
+		return `#${Math.floor(Math.random() * 16777215).toString(16)}`;
+	},
+
+	// interval() {
+	// 	timerId = setInterval(() => {
+	// 		changeBgColorRandom();
+	// 	}, 1000);
+	// 	stopBtn.disabled = false;
+	// },
+
+	start() {
 startBtn.addEventListener("click", () => {
-  timerId = setInterval(() => {
-    
-  }, 1000);
-});
+timerId = setInterval(() => {
+  changeBgColorRandom();
+		}, 1000);
+			// this.interval();
+			startBtn.disabled = true;
+			stopBtn.disabled = false;
+		});
+
+		stopBtn.addEventListener("click", this.stop);
+	},
+
+	stop() {
+clearInterval(timerId);
+stopBtn.disabled = true;
+startBtn.disabled = false;
+},
+		
+	
+};
 
 
-stopBtn.addEventListener("click", () => {
-  clearInterval(timerId);
-  console.log(`Interval with id ${timerId} has stopped!`);
-});
+
+randomBodyColorGenerator.start();
 
 
 
-
-function getRandomHexColor() {
-  return `#${Math.floor(Math.random() * 16777215).toString(16)}`;
-}
