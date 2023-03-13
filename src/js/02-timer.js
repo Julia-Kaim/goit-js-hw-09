@@ -64,6 +64,7 @@ const options = {
 				selectedSeconds.textContent === "00"
 			) {
 				clearInterval(timerId);
+				btnStart.setAttribute("disabled", true);
 			}
 		};
 
